@@ -1,5 +1,6 @@
 <script setup>
 import Dropdown from "@/Components/Dropdown.vue";
+import DropdownLink from "@/Components/DropdownLink.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
@@ -70,6 +71,12 @@ const editing = ref(false);
             >
               Edit
             </button>
+            <DropdownLink
+              as="button"
+              :href="route('chirps.destroy', chirp.id)"
+              method="delete"
+              >Delete</DropdownLink
+            >
           </template>
         </Dropdown>
       </div>
@@ -89,8 +96,17 @@ const editing = ref(false);
         ></textarea>
         <InputError :message="form.errors.message" class="mt-2" />
         <div class="space-x-2">
-            <PrimaryButton class="mt-2">Save</PrimaryButton>
-            <button class="mt-4" @click="editing = false; form.reset(); form.clearErrors();">Cancel</button>
+          <PrimaryButton class="mt-2">Save</PrimaryButton>
+          <button
+            class="mt-4"
+            @click="
+              editing = false;
+              form.reset();
+              form.clearErrors();
+            "
+          >
+            Cancel
+          </button>
         </div>
       </form>
       <p v-else class="mt-4 text-lg text-gray-900">{{ chirp.message }}</p>
